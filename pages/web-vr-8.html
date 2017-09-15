@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent('scale-on-mouseenter', {
+        schema: {
+          to: {default: '2 2 2'}
+        },
+        init: function () {
+          var data = this.data;
+          this.el.addEventListener('mouseenter', function () {
+            this.setAttribute('scale', data.to);
+          });
+        }
+      });
+
+      AFRAME.registerComponent('scale-on-mouseleave', {
+        schema: {
+          to: {default: '2 2 2'}
+        },
+        init: function () {
+          var data = this.data;
+          this.el.addEventListener('mouseleave', function () {
+            this.setAttribute('scale', data.to);
+          });
+        }
+      });
+    </script>
+
+    <a-scene>
+      <a-assets>
+        <img id="skyImage" src="http://www.digitalfllad.com/wp-content/uploads/2014/10/tmobile_shot01.jpg">
+      </a-assets>
+
+      <a-box position="-5 -1.5 0.7" rotation="0 45 0" color="red"
+      scale-on-mouseenter scale-on-mouseleave="to: 1 1 1">
+        <a-animation attribute="position" to="-5 -1 0.7" direction="alternate" dur="1750" repeat="indefinite">
+        </a-animation>
+      </a-box>
+
+      <a-sky src="#skyImage"></a-sky>
+
+      <a-camera>
+        <a-cursor></a-cursor>
+      </a-camera>
+    </a-scene>
+  <body>
+</html>
